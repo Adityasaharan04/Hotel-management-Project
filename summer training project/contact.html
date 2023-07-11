@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Us</title>
+  <style>
+    /* CSS Styles */
+    body {     
+      background-image: url('images/cs.jpg');
+      font-family: Arial, sans-serif;
+    }
+
+    #navbar {
+      background-color: rgba(218, 213, 213, 0.678);
+      color: #fff;
+      padding: 10px;
+    }
+
+    #navbar ul {
+      font-size: 20px;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #navbar li {
+      margin-left: 60px;
+      float: left;
+    }
+
+    #navbar li a {
+      font-weight: bold;
+      display: block;
+      color: #000000;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    #navbar li a:hover {
+      background-color: #ffffff;
+    }
+
+    #contact-info {
+      border-radius: 40%;
+      background-color: #ffffffaf;
+      margin-top: 120px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #contact-info h2 {
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    #contact-info p {
+      font-size: 20px;
+      font-weight: bold;
+      color: #000000;
+      margin-bottom: 5px;
+    }
+
+    #chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    #message-form {
+      background-color: #ffffff17;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #message-form h3 {
+      border-radius: 40%;
+      background-color: #ffffff63;
+    }
+
+    #message-form textarea {
+      border-radius: 10%;
+      font-size: 20px;
+      width: 300px;
+      height: 100px;
+      resize: none;
+    }
+
+    #message-form button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+
+    .ratings {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .rating-stars {
+      display: inline-block;
+      font-size: 24px;
+      color: #ffcc00;
+      cursor: pointer;
+    }
+
+    .rating-stars:hover,
+    .rating-stars.active {
+      color: #ffcc00;
+    }
+
+    .feedback-section {
+      margin-top: 20px;
+    }
+
+    .feedback-form {
+      text-align: center;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form textarea {
+      width: 300px;
+      padding: 8px;
+      margin: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .feedback-form button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <div id="navbar">
+    <ul>
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Room .html">Rooms</a></li>
+      <li><a href="reservation.html">Reservation</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a href="billing.html">Billing</a></li> 
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <!-- Contact Information -->
+  <div id="contact-info">
+    <h2>Contact Us</h2>
+    <p>Hotel Name: TAJ Hotel</p>
+    <p>Address: 321 PLA Street, City-Hisar, Country-India</p>
+    <p>Email: taz@xyzhostel.com</p>
+    <p>Phone: +91 9817524085</p>
+    <div class="ratings">
+      <p>Rate your experience:</p>
+      <div class="rating-stars" onclick="rate(1)">&#9733;</div>
+      <div class="rating-stars" onclick="rate(2)">&#9733;</div>
+      <div class="rating-stars" onclick="rate(3)">&#9733;</div>
+      <div class="rating-stars" onclick="rate(4)">&#9733;</div>
+      <div class="rating-stars" onclick="rate(5)">&#9733;</div>
+    </div>
+    <div class="feedback-section">
+      <h3>Leave your feedback:</h3>
+      <div class="feedback-form">
+        <input type="text" placeholder="Name">
+        <br>
+        <input type="text" placeholder="Email">
+        <br>
+        <textarea placeholder="Your feedback" required></textarea>
+        <br>
+        <button type="submit" value="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedRating = 0;
+
+    function rate(rating) {
+      selectedRating = rating;
+      const ratingStars = document.querySelectorAll(".rating-stars");
+      ratingStars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add("active");
+        } else {
+          star.classList.remove("active");
+        }
+      });
+    }
+
+    // Add event listener to submit button in the feedback form
+    const feedbackForm = document.querySelector(".feedback-form");
+    feedbackForm.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Perform feedback submission here
+      const name = feedbackForm.querySelector('input[type="text"][placeholder="Name"]').value;
+      const email = feedbackForm.querySelector('input[type="text"][placeholder="Email"]').value;
+      const feedback = feedbackForm.querySelector("textarea").value;
+
+      // For demonstration purposes, display the feedback in the console
+      console.log("Name: " + name);
+      console.log("Email: " + email);
+      console.log("Feedback: " + feedback);
+
+      // Clear the form inputs and reset rating
+      feedbackForm.reset();
+      selectedRating = 0;
+      const ratingStars = document.querySelectorAll(".rating-stars");
+      ratingStars.forEach(star => star.classList.remove("active"));
+    });
+  </script>
+</body>
+</html>

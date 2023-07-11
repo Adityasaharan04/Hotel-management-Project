@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservation</title>
+  <style>
+    /* CSS Styles */
+    body {
+      background-image: url('images/h4.jpg');
+      background-color: #ffffff36;
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      background-color: rgba(152, 199, 225, 0.203);
+    }
+
+    .navbar a {
+      font-weight: bold;
+      margin-left: 60px;
+      float: left;
+      color: #1a0707;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 20px;
+      margin-right: 10px; 
+    }
+
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .navbar a.active {
+      color: rgb(0, 0, 0);
+    }
+
+    #reservation-container {
+      background-image: url('images/r5.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 48px auto;
+      width: 80%;
+      max-width: 800px;
+      background-color: rgba(255, 254, 254, 0.543);
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #reservation-container p {
+      color: #fff;
+      font-weight: bold;
+      background-color: #313131cb;
+    }
+
+    #reservation-container table {
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    #reservation-container th,
+    #reservation-container td {
+      padding: 8px;
+    }
+
+    #reservation-container input[type="submit"] {
+      margin-left: 80px;
+      border-radius: 30px;
+      padding: 10px 20px;
+      background-color: #023453d4;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      cursor: pointer; 
+    }
+    
+    #reservation-success {
+      display: none;
+      color: #fff;
+      background-color: #313131cb;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="homepage.html">Home</a>
+    <a href="Room .html">Rooms</a>
+    <a href="reservation.html">Reservation</a>
+    <a href="service.html">Services</a>
+    <a href="billing.html">Billing</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+
+  <div id="reservation-container">
+    <h2>Make a Reservation</h2>
+    <p>Book your stay with us today and let us create unforgettable memories during your visit to our luxurious hotel.</p>
+    <p>Please fill in the form below to make a reservation:</p>
+    
+    <form id="reservation-form">
+      <table>
+        <tr>
+          <th>Check-in Date:</th>
+          <td><input type="date" id="check-in" name="check-in" required></td>
+        </tr>
+        <tr>
+          <th>Check-out Date:</th>
+          <td><input type="date" id="check-out" name="check-out" required></td>
+        </tr>
+        <tr>
+          <th>Identity Type:</th>
+          <td>
+            <select id="identity-type" name="identity-type" required>
+              <option value="">Select</option>
+              <option value="passport">Passport</option>
+              <option value="driving-license">Driving License</option>
+              <option value="id-card">ID Card</option>
+              <option value="Aadhar Card">AadharCard</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Identity Number:</th>
+          <td><input type="number" id="identity-number" name="identity-number" required></td>
+        </tr>
+        <tr>
+          <th>Number of Guests:</th>
+          <td><input type="number" id="guests" name="guests" min="1" required></td>
+        </tr>
+        <tr>
+          <th>Room Type:</th>
+          <td>
+            <select id="room-type" name="room-type" required>
+              <option value="">Select</option>
+              <option value="single">Single</option>
+              <option value="double">Double</option>
+              <option value="suite">Suite</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Guest Name:</th>
+          <td><input type="text" id="guest-name" name="guest-name" required></td>
+        </tr>
+        <tr>
+          <th>Address:</th>
+          <td><input type="text" id="guest-address" name="guest-address" required></td>
+        </tr>
+      </table>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+    
+    <div id="reservation-success">
+      <p>Your reservation was successful!</p>
+      <p>Your room number is: <span id="room-number"></span></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("reservation-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      // Get the values from the form
+      const checkIn = document.getElementById("check-in").value;
+      const checkOut = document.getElementById("check-out").value;
+      const identityType = document.getElementById("identity-type").value;
+      const identityNumber = document.getElementById("identity-number").value;
+      const guests = document.getElementById("guests").value;
+      const roomType = document.getElementById("room-type").value;
+      const guestName = document.getElementById("guest-name").value;
+      const guestAddress = document.getElementById("guest-address").value;
+      
+      // Create an object to store the reservation data
+      const reservationData = {
+        checkIn: checkIn,
+        checkOut: checkOut,
+        identityType: identityType,
+        identityNumber: identityNumber,
+        guests: guests,
+        roomType: roomType,
+        guestName: guestName,
+        guestAddress: guestAddress
+      };
+      
+      // Save the reservation data in localStorage
+      localStorage.setItem("reservationData", JSON.stringify(reservationData));
+      
+      // Simulating a successful reservation and room number assignment
+      const roomNumber = "107"; // Replace with actual room number
+      
+      // Show the success message and display the room number
+      document.getElementById("room-number").textContent = roomNumber;
+      document.getElementById("reservation-success").style.display = "block";
+      
+      // Clear the form fields
+      document.getElementById("check-in").value = "";
+      document.getElementById("check-out").value = "";
+      document.getElementById("identity-type").value = "";
+      document.getElementById("identity-number").value = "";
+      document.getElementById("guests").value = "";
+      document.getElementById("room-type").value = "";
+      document.getElementById("guest-name").value = "";
+      document.getElementById("guest-address").value = "";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hotel Accommodation Billing</title>
+  <style>
+    body {
+      background-image: url('images/cash.jpg');
+      margin: 0;
+      font-family: Arial, sans-serif;
+      margin-top: 20px;
+    }
+
+    /* CSS for navigation bar */
+
+    #navbar {
+      display: inline;
+      background-color: #ffffff;
+      color: #faf1f1a2;
+    } 
+
+    #navbar ul {
+      list-style-type: none;
+      background-color: #ffffffa9;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #navbar li {
+      margin-left:60px ;
+      float: left;
+    }
+
+    #navbar li a {
+      font-size: 22px;
+      font-weight: bold;
+      display: block;
+      color: #000000;
+      text-align: center;
+      padding: 20px 16px ;
+      text-decoration: none;
+    }
+
+    #navbar li a:hover {
+      background-color: #dbdbdb;
+    }
+
+    .billing-container {
+      margin-top: 50px;
+      margin-left: 500px;
+      width: 400px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .billing-container h1 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .billing-container .form-group {
+      margin-bottom: 10px;
+    }
+
+    .billing-container label {
+      font-weight: bold;
+    }
+
+    .billing-container input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .billing-container .btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .billing-container .btn:hover {
+      background-color: #45a049;
+    }
+
+    .billing-container .bill {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>  
+  <div id="navbar">
+    <ul>
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="Room .html">Rooms</a></li>
+      <li><a href="reservation.html">Reservation</a></li>
+      <li><a href="service.html">Services</a></li>
+      <li><a href="billing.html">Billing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </div> 
+
+  <div class="billing-container">
+    <h1>Accommodation Billing</h1>
+    <form id="billing-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="room">Room Number:</label>
+        <input type="text" id="room" name="room" required>
+      </div>
+      <div class="form-group">
+        <label for="check-in">Check-in Date:</label>
+        <input type="text" id="check-in" name="check-in" required>
+      </div>
+      <div class="form-group">
+        <label for="check-out">Check-out Date:</label>
+        <input type="text" id="check-out" name="check-out" required>
+      </div>
+      <button type="submit" id="generate-btn" class="btn">Generate Bill</button>
+    </form>
+    <div id="bill-container" class="bill"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('billing-form');
+      const generateButton = document.getElementById('generate-btn');
+      const billContainer = document.getElementById('bill-container');
+      const reservationData = JSON.parse(localStorage.getItem('reservationData'));
+
+      if (reservationData) {
+        document.getElementById('name').value = reservationData.name;
+        document.getElementById('room').value = reservationData.room;
+        document.getElementById('check-in').value = reservationData.checkIn;
+        document.getElementById('check-out').value = reservationData.checkOut;
+      }
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const room = document.getElementById('room').value;
+        const checkIn = document.getElementById('check-in').value;
+        const checkOut = document.getElementById('check-out').value;
+
+        // Generate the bill content
+        const billContent = `
+          <h2>Hotel Accommodation Bill</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Room Number:</strong> ${room}</p>
+          <p><strong>Check-in Date:</strong> ${checkIn}</p>
+          <p><strong>Check-out Date:</strong> ${checkOut}</p>
+          <p><strong>Total Amount:</strong> ₹15000</p>
+        `;
+
+        // Display the bill
+        billContainer.innerHTML = billContent;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Reservation or Availability</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .reservation-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .btn-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #45a049;
+    }
+
+    .result-container {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .result-text {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reservation-container">
+    <h1>Check Reservation or Availability</h1>
+    <div class="form-group">
+      <label for="check-in">Check-in Date:</label>
+      <input type="date" id="check-in" name="check-in" required>
+    </div>
+    <div class="form-group">
+      <label for="check-out">Check-out Date:</label>
+      <input type="date" id="check-out" name="check-out" required>
+    </div>
+    <div class="form-group">
+      <label for="identity-type">Identity Type:</label>
+      <select id="identity-type" name="identity-type" required>
+        <option value="">Select Identity Type</option>
+        <option value="passport">Passport</option>
+        <option value="driving-license">Driving License</option>
+        <option value="id-card">ID Card</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="identity-number">Identity Number:</label>
+      <input type="text" id="identity-number" name="identity-number" required>
+    </div>
+    <div class="form-group">
+      <label for="number-of-guests">Number of Guests:</label>
+      <input type="text" id="number-of-guests" name="number-of-guests" required>
+    </div>
+    <div class="form-group">
+      <label for="guest-names">Guest Names:</label>
+      <input type="text" id="guest-names" name="guest-names" required>
+    </div>
+    <div class="form-group">
+      <label for="room-type">Room Type:</label>
+      <select id="room-type" name="room-type" required>
+        <option value="">Select Room Type</option>
+        <option value="single">Single</option>
+        <option value="double">Double</option>
+        <option value="suite">Suite</option>
+      </select>
+    </div>
+    <div class="btn-container">
+      <button type="button" id="check-btn" class="btn">Check</button>
+    </div>
+    <div id="result-container" class="result-container">
+      <p class="result-text"></p>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript logic for checking reservation or availability
+    var checkBtn = document.getElementById('check-btn');
+    var resultContainer = document.getElementById('result-container');
+    var resultText = document.querySelector('.result-text');
+
+    checkBtn.addEventListener('click', function() {
+      var checkInDate = document.getElementById('check-in').value;
+      var checkOutDate = document.getElementById('check-out').value;
+      var identityType = document.getElementById('identity-type').value;
+      var identityNumber = document.getElementById('identity-number').value;
+      var numberOfGuests = document.getElementById('number-of-guests').value;
+      var guestNames = document.getElementById('guest-names').value;
+      var roomType = document.getElementById('room-type').value;
+
+      // Perform your reservation or availability check logic here
+      // You can modify the following code to suit your requirements
+
+      // Example: Checking if the room is available for the selected dates
+      var isRoomAvailable = checkRoomAvailability(checkInDate, checkOutDate);
+
+      if (isRoomAvailable) {
+        resultText.textContent = 'The room is available for the selected dates. Booking successful!';
+        // Perform the booking logic here
+        bookRoom(checkInDate, checkOutDate, identityType, identityNumber, numberOfGuests, guestNames, roomType);
+      } else {
+        resultText.textContent = 'Sorry, the room is not available for the selected dates.';
+      }
+
+      resultContainer.style.display = 'block';
+    });
+
+    function checkRoomAvailability(checkInDate, checkOutDate) {
+      // Perform your reservation or availability check logic here
+      // This is just a placeholder function, you need to replace it with your own implementation
+      // Return true if the room is available, false otherwise
+
+      // Example: Checking if the check-in and check-out dates are valid
+      return checkInDate !== '' && checkOutDate !== '';
+    }
+
+    function bookRoom(checkInDate, checkOutDate, identityType, identityNumber, numberOfGuests, guestNames, roomType) {
+      // Perform your booking logic here
+      // This is just a placeholder function, you need to replace it with your own implementation
+
+      // Example: Displaying the booking details
+      console.log('Booking Details:');
+      console.log('Check-in Date:', checkInDate);
+      console.log('Check-out Date:', checkOutDate);
+      console.log('Identity Type:', identityType);
+      console.log('Identity Number:', identityNumber);
+      console.log('Number of Guests:', numberOfGuests);
+      console.log('Guest Names:', guestNames);
+      console.log('Room Type:', roomType);
+    }
+  </script>
+</body>
+</html>
